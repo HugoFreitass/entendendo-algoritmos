@@ -1,25 +1,28 @@
 #include <stdio.h>
-#define TARGET 68
+#define TARGET 76
 
-int main(){
-    int array[] = {5, 10, 25, 53, 68, 72, 76, 81, 89, 97};
-    int n = sizeof(array);
+int binarySearch(int* array, int size, int target){
     int low = 0;
-    int high = n-1;
-    int target = TARGET;
+    int high = size-1;
     while(low <= high){
         int middle = (low + high)/2;
         int guess = array[middle];
         if(guess == target){
-            printf("%d\n", middle);
-            printf("%d \n", guess);
-            return 0;
+            return middle;
         }
         if(guess > target){
-            high = middle;
+            high = middle-1;
         } else {
-            low = middle;
+            low = middle+1;
         }
     }
+    return -1;
+}
+
+int main(){
+    int array[] = {5, 10, 25, 53, 68, 72, 76, 81, 89, 97};
+    int size = sizeof(array)/sizeof(array[0]);
+    printf("%d\n\n", binarySearch(array, size, TARGET));
+    
     return 0;
 }
